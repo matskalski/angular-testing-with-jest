@@ -11,10 +11,10 @@ describe('ApiService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
+        ApiService,
         //zależności zastąpujące HttpClienta
         //aby w trakcie testów nie wysyłać prawdziwych zapytań http a jedynie je mockować
         //wcześniej stosowany HttpClientTestingModule jest oznaczony jako deprecated
-        ApiService,
         provideHttpClient(),
         provideHttpClientTesting()
       ],
@@ -68,8 +68,8 @@ describe('ApiService', () => {
       expect(tag).toEqual({ id: '1', name: 'foo' })
     })
 
-    it('passes the correct body', ()=> {
-        let tag: TagInterface | undefined
+    it('passes the correct body', () => {
+      let tag: TagInterface | undefined
 
       apiService.createTag('foo').subscribe(resp => {
         tag = resp
@@ -83,11 +83,11 @@ describe('ApiService', () => {
       expect(req.request.method).toEqual('POST')
 
       //weryfikacja zawartości body przekazanego do metody
-      expect(req.request.body).toEqual({name: 'foo'})
+      expect(req.request.body).toEqual({ name: 'foo' })
     })
 
     //testowanie błędów z requestu http
-    it('throws error if request failed', ()=>{
+    it('throws error if request failed', () => {
       let actualError: HttpErrorResponse | undefined;
 
       apiService.createTag('foo').subscribe({
