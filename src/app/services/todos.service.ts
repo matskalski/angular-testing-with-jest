@@ -1,7 +1,6 @@
 import { Injectable, inject, signal } from '@angular/core';
 import { TodoInterface } from '../types/todo.interface';
 import { FilterEnum } from '../types/filter.enum';
-
 import { forkJoin } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 

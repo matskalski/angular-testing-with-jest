@@ -1,7 +1,8 @@
 import { Component, computed, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TodosService } from '../../../../services/todos.service';
+
 import { FilterEnum } from '../../../../types/filter.enum';
+import { TodosService } from '../../../../services/todos.service';
 
 @Component({
   selector: 'app-todos-footer',

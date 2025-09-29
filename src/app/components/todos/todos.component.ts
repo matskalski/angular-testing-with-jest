@@ -7,6 +7,10 @@ import { MainComponent } from './components/main/main.component';
   selector: 'app-todos',
   templateUrl: './todos.component.html',
   standalone: true,
-  imports: [HeaderComponent, FooterComponent, MainComponent],
+  imports: [
+    HeaderComponent,
+    FooterComponent,
+    MainComponent
+  ],
 })
 export class TodosComponent {}

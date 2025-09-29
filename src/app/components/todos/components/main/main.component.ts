@@ -1,8 +1,8 @@
 import { Component, OnInit, computed, inject } from '@angular/core';
-import { TodosService } from '../../../../services/todos.service';
 import { CommonModule } from '@angular/common';
 import { FilterEnum } from '../../../../types/filter.enum';
 import { TodoComponent } from '../todo/todo.component';
+import { TodosService } from '../../../../services/todos.service';
 
 @Component({
   selector: 'app-todos-main',
