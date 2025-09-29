@@ -3,11 +3,11 @@ https://medium.com/@abhijit_chikane/set-up-jest-in-angular-v20-project-zoneless-
 
 serwisy:
 utils service - podstawowe testy serwisu
-users service - testy serwisu z zależnościami (wstrzykniętym innym serwisem)
+users service - testy serwisu z zależnościami (wstrzykniętym innym serwisem) - mockowanie zależności
 users with rxjs service - testy serwisu z RXJS
 api service - testy serwisu z zależnością od HttpClient
 todos service - testy serwisu z obsługą wszystkich podstawowych typów metod http (get, post, put, path, delete)
 
 komponenty:
 errorMessage component - podstawowy komponent
-pagination component - testy komponentu z inputem i outputem
+pagination component - testy komponentu z inputem i outputem + plus zdarzenia (click)

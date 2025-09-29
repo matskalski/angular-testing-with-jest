@@ -21,9 +21,10 @@ describe('errorMessageComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('renders default state', () => {
+  it('renders default state', async () => {
     //oczekiwanie na wyrenderowanie się drzewa DOM komponentu
-    fixture.detectChanges();
+    await fixture.whenStable();
+    //fixture.detectChanges();
 
     //przechwytywanie elementów z DOM po atrybucie
     const messageContainer = fixture.debugElement.query(
@@ -33,10 +34,11 @@ describe('errorMessageComponent', () => {
     expect(messageContainer.nativeElement.textContent).toContain("Something went wrong");
   });
 
-  it('renders custom error message', () => {
+  it('renders custom error message', async () => {
     component.message = "Email is already in use";
     //oczekiwanie na przegenerowanie się drzewa DOM komponentu
-    fixture.detectChanges();
+    //fixture.detectChanges();
+    await fixture.whenStable();
 
     //przechwytywanie elementów z DOM po atrybucie
     const messageContainer = fixture.debugElement.query(
