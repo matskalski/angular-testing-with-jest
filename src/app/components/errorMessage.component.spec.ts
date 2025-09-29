@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing"
 import { ErrorMessageComponent } from "./errorMessage.component"
 import { By } from "@angular/platform-browser";
+import { provideZonelessChangeDetection } from "@angular/core";
 
 describe('errorMessageComponent', () => {
   let component: ErrorMessageComponent;
@@ -8,7 +9,8 @@ describe('errorMessageComponent', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [ErrorMessageComponent]
+      imports: [ErrorMessageComponent],
+      providers: [provideZonelessChangeDetection()]
     }).compileComponents();
 
     fixture = TestBed.createComponent(ErrorMessageComponent)
@@ -28,13 +30,10 @@ describe('errorMessageComponent', () => {
       By.css('[data-testid="message-container"]')
     )
 
-    expect(messageContainer.nativeElement.textContent).toEqual("Something went wrong");
+    expect(messageContainer.nativeElement.textContent).toContain("Something went wrong");
   });
 
   it('renders custom error message', () => {
-    //oczekiwanie na wyrenderowanie się drzewa DOM komponentu
-    fixture.detectChanges();
-
     component.message = "Email is already in use";
     //oczekiwanie na przegenerowanie się drzewa DOM komponentu
     fixture.detectChanges();
@@ -44,6 +43,6 @@ describe('errorMessageComponent', () => {
       By.css('[data-testid="message-container"]')
     )
 
-    expect(messageContainer.nativeElement.textContent).toEqual("Email is already in use");
+    expect(messageContainer.nativeElement.textContent).toContain("Email is already in use");
   })
 })

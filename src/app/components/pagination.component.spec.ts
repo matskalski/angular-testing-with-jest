@@ -14,5 +14,7 @@ describe('paginationComponent', () => {
     component = fixture.componentInstance;
   })
 
-
+  it('creates component', () => {
+    expect(component).toBeTruthy();
+  });
 })
