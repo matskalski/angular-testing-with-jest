@@ -11,3 +11,5 @@ todos service - testy serwisu z obsługą wszystkich podstawowych typów metod h
 komponenty:
 errorMessage component - podstawowy komponent
 pagination component - testy komponentu z inputem i outputem + plus zdarzenia (click)
+
+footer component - testy rzeczywistego komponentu: tworzenie zależności, symulacja zdarzeń (zmiana w select boxie), zmiany na widoku w zależności od dostarczonych danych
