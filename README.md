@@ -13,3 +13,4 @@ errorMessage component - podstawowy komponent
 pagination component - testy komponentu z inputem i outputem + plus zdarzenia (click)
 
 footer component - testy rzeczywistego komponentu: tworzenie zależności, symulacja zdarzeń (zmiana w select boxie), zmiany na widoku w zależności od dostarczonych danych
+header component - testy rzeczywistego komponentu, tworzenie zależności, symulacja zdarzeń (wcisniecie enter), weryfikacja wywołania metody z serwisu zależnego z właściwymi parametrami
