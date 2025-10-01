@@ -25,6 +25,7 @@ export class MainComponent implements OnInit {
     }
     return todos;
   });
+
   isAllTodosSelected = computed(() =>
     this.todosService.todosSig().every((todo) => todo.isCompleted)
   );
