@@ -1,10 +1,16 @@
 import { TodoComponent } from './../todo/todo.component';
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 import { MainComponent } from "./main.component";
-import { HttpTestingController, provideHttpClientTesting } from "@angular/common/http/testing";
+import { provideHttpClientTesting } from "@angular/common/http/testing";
 import { TodosService } from "../../../../services/todos.service";
 import { provideHttpClient } from "@angular/common/http";
-import { Component, EventEmitter, Input, Output, provideZonelessChangeDetection } from "@angular/core";
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  provideZonelessChangeDetection
+} from "@angular/core";
 import { TodoInterface } from '../../../../types/todo.interface';
 import { By } from '@angular/platform-browser';
 
@@ -26,7 +32,6 @@ class TodoComponentMock {
 describe('main component', () => {
   let component: MainComponent;
   let fixture: ComponentFixture<MainComponent>
-  //let httpTestingController: HttpTestingController;
   let todosService: TodosService;
 
   beforeEach(async () => {
@@ -53,8 +58,6 @@ describe('main component', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(MainComponent);
     component = fixture.componentInstance;
-    //przypisanie testowego controlera do zapytań http
-    //httpTestingController = TestBed.inject(HttpTestingController);
     todosService = TestBed.inject(TodosService);
     //tworzenie stanu inicjalnego
     fixture.detectChanges();
