@@ -9,6 +9,7 @@ import {
   SimpleChanges,
   ViewChild,
   inject,
+  input,
 } from '@angular/core';
 import { TodoInterface } from '../../../../types/todo.interface';
 import { CommonModule } from '@angular/common';

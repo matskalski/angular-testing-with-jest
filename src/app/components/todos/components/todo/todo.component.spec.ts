@@ -200,41 +200,4 @@ describe('todo component', () => {
 
     expect(clickedTodoId).toEqual('1')
   })
-
-  it('should change editnig test after input value changed', () => {
-    //będziemy weryfikować czy metoda toggleTodo
-    //została wywołana z odpowiednim parametrem
-    jest.spyOn(todosService, 'toggleTodo')
-      //trzeba dodać mockImplementation - inaczej wywołanie
-      //nastąpi na rzeczywistej metodzie w serwisie
-      //alternatywnym rozwiązaniem jest zamockowanie calego serwisu
-      //wewnątrz podajemy implementacje zamockowanej fukcji - w tym wypadku nie robi ona nic
-      .mockImplementation(() => { })
-
-
-    jest.useFakeTimers();
-
-    setTimeout(() => {
-      console.log('abc')
-      component.isEditing = true
-      fixture.detectChanges();
-      const input = fixture.debugElement.query(
-        By.css('[data-testid="edit"]')
-      );
-
-      input.nativeElement.value = 'test'
-
-      //jest.runAllTicks(1)
-
-      //symulacja zdarzenia keyup
-      input.nativeElement.dispatchEvent(
-        new KeyboardEvent('keyup', { key: 'Enter' })
-      );
-
-      console.log(component.editingText)
-    }, 2000)
-
-
-    jest.useRealTimers();
-  })
 })
