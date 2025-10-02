@@ -22,3 +22,5 @@ mockowanie komponetu zagnieżdżonego, sprawdzanie działania inputów i outputu
 todo component - testy rzeczywistego komponentu, tworzenie zależności, symulacja zdarzeń (click, double click), weryfikowanie dzialania outputu (emitowanie danych), 
 mockowanie zmiany inputu po zainicjalizowaniu komponentu(!) z użyciem changeDetectionRef i asynchronicznym wyczekaniem na zmiany (stosowane w wypadku błedy NG0100 - https://angular.dev/errors/NG0100)
 
+
+auth-guard - testy dla guarda (canActivate)
