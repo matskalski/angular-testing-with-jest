@@ -1,9 +1,9 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing"
+import { ComponentFixture, fakeAsync, TestBed } from "@angular/core/testing"
 import { TodoComponent } from "./todo.component"
 import { provideHttpClient } from "@angular/common/http";
 import { TodosService } from "../../../../services/todos.service";
 import { provideHttpClientTesting } from "@angular/common/http/testing";
-import { provideZonelessChangeDetection } from "@angular/core";
+import { provideZonelessChangeDetection, SimpleChange } from "@angular/core";
 import { By } from "@angular/platform-browser";
 import { first, last } from "rxjs";
 
@@ -200,4 +200,72 @@ describe('todo component', () => {
 
     expect(clickedTodoId).toEqual('1')
   })
+
+  it('should change todo', async () => {
+    //będziemy weryfikować czy metoda changeTodo
+    //została wywołana z odpowiednim parametrem
+    jest.spyOn(todosService, 'changeTodo')
+      //trzeba dodać mockImplementation - inaczej wywołanie
+      //nastąpi na rzeczywistej metodzie w serwisie
+      //alternatywnym rozwiązaniem jest zamockowanie calego serwisu
+      //wewnątrz podajemy implementacje zamockowanej fukcji - w tym wypadku nie robi ona nic
+      .mockImplementation(() => { })
+
+    component.isEditing = true;
+
+    //wymuszenie detekcji zmian po zmianie w inpucie
+    //(when stable) nie wymusza detekcji, jedynie czeka jeśli została uruchomiona,
+    //ale nie wymusza jej uruchomienia w przeciwnym przypadku
+    fixture.changeDetectorRef.detectChanges();
+    //wrzucenie zadania na kolejną iteracje pętli zadań w przeglądarce
+    //bez użycia tego pojawi się błąd mówiący, że w komponencie nastąpiły zmiany
+    //kiż po zakończeniu działania systemu detkcji uruchimionego przy inicjalizacji komponentu
+    await tickAsync(0);
+
+    const edit = fixture.debugElement.query(
+      By.css('[data-testid="edit"]')
+    );
+
+    edit.nativeElement.value = 'test'
+    //symulacja wcisniecia enter
+    edit.nativeElement.dispatchEvent(
+      new KeyboardEvent('keyup', { key: 'Enter' })
+    )
+
+    expect(todosService.changeTodo).toHaveBeenCalledWith('1', 'test')
+  })
+
+  //testy funkcji zawierających setTimeout
+  it('should focus after editing activation', async () => {
+
+    //mockowanie ngOnChanges
+    component.ngOnChanges({
+      ////nasłuchiwanie na zmiany w isEdititing
+      //poprzednia warość false, obecna true, inicjalna wartość false
+      isEditing: new SimpleChange(false, true, false)
+    })
+
+    //poprzez zmianę isEditing aktywujemy ngOnChanges
+    component.isEditing = true;
+
+    //wymuszenie detekcji zmian po zmianie w inpucie
+    //(when stable) nie wymusza detekcji, jedynie czeka jeśli została uruchomiona,
+    //ale nie wymusza jej uruchomienia w przeciwnym przypadku
+    fixture.changeDetectorRef.detectChanges()
+    //wrzucenie zadania na kolejną iteracje pętli zadań w przeglądarce
+    //bez użycia tego pojawi się błąd mówiący, że w komponencie nastąpiły zmiany
+    //kiż po zakończeniu działania systemu detkcji uruchimionego przy inicjalizacji komponentu
+    await tickAsync(0);
+
+    //wyszukanie elementu który aktualnie jest sfocusowany
+    const edit = fixture.debugElement.query(
+      By.css(':focus')
+    );
+
+    expect(edit).toBeTruthy();
+  })
 })
+
+function tickAsync(delayMs = 0): Promise<void> {
+  return new Promise(resolve => setTimeout(resolve, delayMs));
+}

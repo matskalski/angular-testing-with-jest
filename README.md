@@ -13,7 +13,12 @@ errorMessage component - podstawowy komponent
 pagination component - testy komponentu z inputem i outputem + plus zdarzenia (click)
 
 footer component - testy rzeczywistego komponentu: tworzenie zależności, symulacja zdarzeń (zmiana w select boxie), zmiany na widoku w zależności od dostarczonych danych
+
 header component - testy rzeczywistego komponentu, tworzenie zależności, symulacja zdarzeń (wcisniecie enter), weryfikacja wywołania metody z serwisu zależnego z właściwymi parametrami
+
 main component - testy rzeczywistego komponentu, tworzenie zależności, symulacja zdarzeń (clikc), weryfikacja wywołania metody z serwisu zależnego z właściwymi parametrami, sprawdzenie czy klasy css są przypsiane w zależności od wartości w komponencie, sprawdzenie property bindingu ([checked]="isAllTodosSelected()"),
 mockowanie komponetu zagnieżdżonego, sprawdzanie działania inputów i outputu w komponencie zagnieżdżonym (odebranie danych)
-todo component - testy rzeczywistego komponentu, tworzenie zależności, symulacja zdarzeń (click, double click), weryfikowanie dzialania outputu (emitowanie danych)
+
+todo component - testy rzeczywistego komponentu, tworzenie zależności, symulacja zdarzeń (click, double click), weryfikowanie dzialania outputu (emitowanie danych), 
+mockowanie zmiany inputu po zainicjalizowaniu komponentu(!) z użyciem changeDetectionRef i asynchronicznym wyczekaniem na zmiany (stosowane w wypadku błedy NG0100 - https://angular.dev/errors/NG0100)
+
