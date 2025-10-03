@@ -13,6 +13,7 @@
       *ngFor="let todo of visibleTodos()"
       [todo]="todo"
       data-testid="todo"
+      data-cy="todo"
       [isEditing]="editingId === todo.id"
       (setEditingId)="setEditingId($event)"
     ></app-todos-todo>
