@@ -24,3 +24,5 @@ mockowanie zmiany inputu po zainicjalizowaniu komponentu(!) z użyciem changeDet
 
 
 auth-guard - testy dla guarda (canActivate)
+
+spec.cy.ts - testy integracyjne z cypress
