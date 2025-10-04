@@ -1,6 +1,9 @@
 konfiguracja jest na podstawie
 https://medium.com/@abhijit_chikane/set-up-jest-in-angular-v20-project-zoneless-replace-karma-jasmine-5ddd5552f2cb
 
+w przypadku problemu z instalacją można spróbować podbić wersję paczek
+ng update @angular/cli @angular/core
+
 serwisy:
 utils service - podstawowe testy serwisu
 users service - testy serwisu z zależnościami (wstrzykniętym innym serwisem) - mockowanie zależności
