@@ -29,3 +29,17 @@ mockowanie zmiany inputu po zainicjalizowaniu komponentu(!) z użyciem changeDet
 auth-guard - testy dla guarda (canActivate)
 
 spec.cy.ts - testy integracyjne z cypress
+
+
+pozostałe case'y:
+ustawienie w teście sygnału oznaczonego w komponencie jako protected:
+component: protected isLogged = signal<boolean>(false);
+spec: component['isLogged'].set(true)
+      await fixture.whenStable();
+
+mockowanie w teście funkcji oznaczonej jako protected:
+component: protected closeSidenav() {
+              this.sidenavClose.emit()
+           }
+spec: const closeSidenavFn = jest.spyOn(SidenavList.prototype as any, 'closeSidenav');
+      closeSidenavFn.mockImplementation(() => { });
