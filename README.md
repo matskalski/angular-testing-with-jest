@@ -36,6 +36,7 @@ ustawienie w teście sygnału oznaczonego w komponencie jako protected:
 component: protected isLogged = signal<boolean>(false);
 spec: component['isLogged'].set(true)
       await fixture.whenStable();
+      
 
 mockowanie w teście funkcji oznaczonej jako protected:
 component: protected closeSidenav() {
