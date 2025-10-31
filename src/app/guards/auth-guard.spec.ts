@@ -11,7 +11,7 @@ import { Observable, of } from 'rxjs';
 import { CurrentUserService } from './currentUser.service';
 import { provideZonelessChangeDetection } from '@angular/core';
 
-describe('authGuardGuard', () => {
+describe('authGuard', () => {
   const usersServiceMock = {
     currentUser$: of<{ id: string, name: string } | null>()
   }
@@ -21,7 +21,6 @@ describe('authGuardGuard', () => {
     TestBed.runInInjectionContext(() => authGuard(...guardParameters));
 
   beforeEach(async () => {
-
     await TestBed.configureTestingModule({
       imports: [
         [RouterModule.forRoot([])]
