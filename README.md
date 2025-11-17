@@ -36,7 +36,10 @@ ustawienie w teście sygnału oznaczonego w komponencie jako protected:
 component: protected isLogged = signal<boolean>(false);
 spec: component['isLogged'].set(true)
       await fixture.whenStable();
-      
+
+pobieranie w teście wartości sygnału oznaczonego w komponencie jako protected
+component: protected isLogged = signal<boolean>(false);
+spec: component['isLogged']()
 
 mockowanie w teście funkcji oznaczonej jako protected:
 component: protected closeSidenav() {
@@ -49,3 +52,47 @@ spec: const closeSidenavFn = jest.spyOn(SidenavList.prototype as any, 'closeSide
 mockowanie erroru zwróconego z requestu http:
 const req = httpTestingController.expectOne('https://localhost:7144/api/accounts/login');
 req.flush("", { status: 404, statusText: "Not Found" });
+
+jeżeli konieczne jest zamockowanie zależności (np. serwisu) i trzeba zamockować jego właściwości i funkcje:
+serwis: 
+export class MembersService {
+   editMode = signal(false);
+
+    uploadPhoto(file: File){
+      const formData = new FormData();
+      formData.append('file', file);
+      console.log('aaa', formData)
+      return this.httpClient.post<PhotoModel>(`${this.baseUrl}members/add-photo`, formData);
+  }
+}
+
+mockowanie:
+  const membersServiceMock = {
+     //zamockowanie property (editMode):
+     editMode: signal(false),
+
+    //zamockowanie funckji - klasycznie:
+    uploadPhoto: () =>{
+         const res: PhotoModel = {
+         id: 1,
+         url: 'test',
+         publicId: undefined,
+         memberId: '1'
+       };
+
+       return of(res);
+      }
+
+    //zamockowanie z użyciem jest
+    uploadPhoto: jest.fn()
+      .mockImplementation(() => {
+        const res: PhotoModel = {
+          id: 1,
+          url: 'test',
+          publicId: undefined,
+          memberId: '1'
+        };
+
+        return of(res);
+      })
+  }
