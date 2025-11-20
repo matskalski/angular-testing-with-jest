@@ -1,0 +1,9 @@
+<span class="flex flex-row items-center justify-between gap-3">
+  <mat-icon class="text-white!" fontIcon={{data.icon}}></mat-icon>
+  <div test-id="message" class="max-w-md max-h-24 wrap-break-word">
+      {{data.message}}
+  </div>
+  <button matIconButton (click)="close()">
+      <mat-icon class="text-white!">close</mat-icon>
+  </button>
+</span>
