@@ -48,6 +48,8 @@ component: protected closeSidenav() {
 spec: const closeSidenavFn = jest.spyOn(SidenavList.prototype as any, 'closeSidenav');
       closeSidenavFn.mockImplementation(() => { });
 
+      expect(closeSidenavFn).toHaveBeenCalled();
+
 
 mockowanie erroru zwróconego z requestu http:
 const req = httpTestingController.expectOne('https://localhost:7144/api/accounts/login');
