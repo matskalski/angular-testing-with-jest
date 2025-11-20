@@ -51,6 +51,14 @@ spec: const closeSidenavFn = jest.spyOn(SidenavList.prototype as any, 'closeSide
       expect(closeSidenavFn).toHaveBeenCalled();
 
 
+wywołanie w teście metody oznaczonej jako protected:
+component:  protected close() {
+                this.snackBarRef.dismiss();
+            }
+
+spec: component['close']();
+
+
 mockowanie erroru zwróconego z requestu http:
 const req = httpTestingController.expectOne('https://localhost:7144/api/accounts/login');
 req.flush("", { status: 404, statusText: "Not Found" });
