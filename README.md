@@ -28,6 +28,7 @@ mockowanie zmiany inputu po zainicjalizowaniu komponentu(!) z użyciem changeDet
 auth-guard - testy dla guarda (canActivate)
 
 errors-intercerpror - testy dla interceptora wychwytującego błędne statusy kodów http w rsponsach
+edit-shop-attribute-resolver = testy dla resolvera
 
 spec.cy.ts - testy integracyjne z cypress
 
