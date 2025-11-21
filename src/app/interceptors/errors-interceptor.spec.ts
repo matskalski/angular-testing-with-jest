@@ -7,6 +7,9 @@ import { provideZonelessChangeDetection } from '@angular/core';
 import { SnackbarService } from '../components/snackbar/snackbarService/snackbar.service';
 
 
+// na podstawie
+// https://medium.com/@js_9757/angular-unit-test-the-http-interceptor-c2464cf8e8da
+
 describe('errorsInterceptor', () => {
   const interceptor: HttpInterceptorFn = (req, next) =>
     TestBed.runInInjectionContext(() => errorsInterceptor(req, next));
