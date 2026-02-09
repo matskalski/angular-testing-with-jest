@@ -108,3 +108,7 @@ mockowanie:
         return of(res);
       })
   }
+
+  ustawienie inputu typu signal (InputSignal):
+  component: userId = input.required<string>();
+  spec: fixture.componentRef.setInput('userId', 'user');
