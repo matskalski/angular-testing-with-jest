@@ -45,6 +45,7 @@ describe('editShopAttributeResolver', () => {
     TestBed.configureTestingModule({
       providers: [
         { provide: ShopAttributesService, useValue: shopAttributesServiceMock },
+        //provider dla ActivatedRoute
         provideRouter([
           { path: 'not-found', component: DummyComponent },
         ])

@@ -112,3 +112,95 @@ mockowanie:
   ustawienie inputu typu signal (InputSignal):
   component: userId = input.required<string>();
   spec: fixture.componentRef.setInput('userId', 'user');
+
+mockowanie impelementacji funckcji w jest:
+const shopAttributesServiceMock = {
+    getAttributes: jest.fn()
+      .mockImplementation(() => {
+        const attributes = [
+          {
+            id: '01-12-23',
+            name: 'attr1',
+            tableName: 'tableName1',
+            columnName: 'columnName1',
+            canBeEdited: true,
+            version: 2
+          },
+          {
+            id: '10-21-31',
+            name: 'attr2',
+            tableName: 'tableName1',
+            columnName: 'columnName2',
+            canBeEdited: false,
+            version: 1
+          },
+          {
+            id: '45-67-89',
+            name: 'attr3',
+            tableName: 'tableName2',
+            columnName: 'columnName3',
+            canBeEdited: true,
+            version: 1
+          },
+        ];
+
+        return of(attributes)
+      })
+  };
+
+mockowanie danych pochodzących z resolvera:
+  po dodaniu resolvera do appRoutes istotne jest pod jakim kluczem został dodany (w tym wypadku data)
+ 
+  {
+    path: 'editdictionary/:dictionaryname',
+    resolve: { data: editDictionaryResolver },
+    runGuardsAndResolvers: 'always',
+    component: EditDictionary
+  },
+
+  w komponencie podczas inicjalizacji należy zasubskrybować się na route aby pobrać dane z resolvera
+  route.data -> pobieranie parametru data z routu
+   const data = res['data']; -> pobieranie parametru data, ponieważ w appRoutes resolver zarejestrowny jest pod kluczem data
+
+    ngOnInit(): void {
+    this.route.data.subscribe(res =>{
+      //resolver w routingu jest zarejestrowany pod propertą data - resolve: {data: editDictionaryResolver }
+      const data = res['data'];
+
+      this.name = data.name;
+      this.values = data.values.map((v: { id: string; value: string; }) => {
+        return<DynamicFormValue> {
+          id: v.id,
+          value: v.value,
+          canBeRemoved: false
+          }
+        });
+      });
+    }
+
+  w testach należy zamockować ActivatedRoute
+  pierwszy parametr data to parametr z route.data, drugi to klucz pod jakim zarejestrowany został resolver
+
+  let activatedRouteMock = {
+    data: of({
+      'data': {
+        name: 'dictionary',
+        values: [
+          {id: 'id1', value: 'value1'},
+          {id: 'id2', value: 'value2'},
+          {id: 'id3', value: 'value3'}
+        ]
+      }
+    })  as Observable<Data>
+  } as ActivatedRoute
+
+  aby działało to poprawnie konieczne będzie też zamockowanie parametry Router o ile jest używany w testach -
+  użycie domyślnego provideRoute będzie powodowało błędy
+  
+  let routerMock = {
+    navigate: jest.fn()
+  }
+
+  całość powinna być zarejestrowana w standardowy sposób
+  { provide: ActivatedRoute, useValue: activatedRouteMock },
+  { provide: Router, useValue: routerMock },
