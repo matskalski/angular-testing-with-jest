@@ -204,3 +204,15 @@ mockowanie danych pochodzących z resolvera:
   całość powinna być zarejestrowana w standardowy sposób
   { provide: ActivatedRoute, useValue: activatedRouteMock },
   { provide: Router, useValue: routerMock },
+
+
+  mockowanie eventu
+  component:   
+  protected onTableSelect(event: MatSelectChange) {
+    this.form.controls['columnName'].setValue(null);
+    this.setColumnsList(event.value);
+  };
+
+  spec:
+  const event = { value: 'table1' } as MatSelectChange;
+  component['onTableSelect'](event);
